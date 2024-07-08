@@ -1,0 +1,28 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      example_input:
+        description: 'An example input'
+        required: true
+        type: string
+    secrets:
+      EXAMPLE_SECRET:
+        required: true
+
+jobs:
+  reusable_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Use the input
+        run: |
+          echo "Input: ${{ inputs.example_input }}"
+
+      - name: Use the secret
+        run: |
+          echo "Secret: ${{ secrets.EXAMPLE_SECRET }}"
+
